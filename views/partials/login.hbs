@@ -1,0 +1,47 @@
+<!-- SignIn Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="loginModalLabel">Окно авторизации</h4>
+      </div>
+      <div class="modal-body">
+        <!-- ko if: errorObj().wrongWin-->
+        <div class="alert alert-danger" role="alert">Ошибка: Выберите правильный номер окна!</div>
+        <!-- /ko -->
+        <form id="operator-login" class="form-signin" autocomplete="off">
+          <h3 class="form-signin-heading">Пожалуйста, авторизуйтесь</h3>
+          <label for="inputLogin" class="sr-only">Логин</label>
+          <input id="inputLogin" class="form-control" data-bind="textInput: operatorLogin, enable: !windowList().length" placeholder="Логин" required="" autofocus="" type="text" autocomplete="off">
+          <label for="inputPassword" class="sr-only">Пароль</label>
+          <input id="inputPassword" class="form-control" data-bind="textInput: operatorPassword, enable: !windowList().length" placeholder="Пароль" required="" type="password" autocomplete="off">
+
+		<!-- ko if: windowList().length -->
+          <select id="inputWindow" class="form-control" required>
+            <option id="default-option" selected="selected">Номер окна</option>
+
+              <!-- ko foreach: windowList-->
+              <option data-bind="text: winNum, value: winId"></option>
+              <!-- /ko -->
+
+          </select>
+		<!-- /ko -->
+
+    
+          <button class="btn btn-lg btn-success btn-block" type="submit" >Войти</button>
+		
+
+    <!-- ko if: windowList().length -->
+          <button class="btn btn-lg btn-success btn-block" data-bind="click: resetLoginWindow">Отмена</button>
+    <!-- /ko -->
+
+    <!-- ko ifnot: windowList().length -->
+          <button class="btn btn-lg btn-success btn-block" id="login-windows" data-bind="click: getLoginWindows, enable: operatorLogin && operatorPassword">Получить список окон</button>
+		<!-- /ko -->
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

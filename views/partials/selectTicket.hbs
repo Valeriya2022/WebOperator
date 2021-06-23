@@ -1,0 +1,48 @@
+<!-- SelectTicket Modal -->
+<div class="modal fade" id="chooseClient" tabindex="-1" role="dialog" aria-labelledby="chooseClientLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="chooseClientLabel">Выбор билета</h4>
+      </div>
+      <div class="modal-body">
+        <!-- ko if: errorObj().wrongTicket-->
+        <div class="alert alert-danger" role="alert" data-bind="text: errorObj().wrongTicketText ? errorObj().wrongTicketText : 'Ошибка при выборе билета' "></div>
+        <!-- /ko -->
+        <table id="ticketSelect" class="table table-condensed table-striped">
+          <thead>
+            <tr>
+              <th scope="Row"></th>
+              <th class="col-sm-1 col-md-1 text-center">№</th>
+              <th class="col-sm-3 col-md-3 text-center">Пришёл</th>
+              <th class="col-sm-2 col-md-3 text-center">Очередь</th>
+              <th class="col-sm-3 col-md-3 text-center">ИИН</th>
+              <th class="col-sm-3 col-md-3 text-center">Перенаправил</th>
+            </tr>
+          </thead>
+          <!-- ko if: sessionTicketList-->
+          <tbody data-bind="foreach: sessionTicketList">
+            <tr>
+              <th class="text-center" scope="col">
+                <div class="radio">
+                  <label class="radio-button">
+                    <input type="radio" name="TicketNumber" data-bind="attr: {id: 'radio-' + num}, value: num"/>
+                    <span class="overlay"></span>
+                  </label>
+                </div>
+              </th>
+              <td class="text-center" data-bind="text: ticketno"></td>
+              <td class="text-center" data-bind="text: $root.formatDate(new Date(starttime*1), 2)"></td>
+              <td class="text-center" data-bind="text: servicename"></td>
+              <td class="text-center" data-bind="text: iin"></td>
+              <td class="text-center" data-bind="text: redirected ? targetoperatorid : '---'"></td>
+            </tr>
+          </tbody>
+          <!-- /ko -->
+        </table>
+        <button class="btn btn-lg btn-success btn-block form-send-btn" data-bind="click: ticketToChoose">Вызвать</button>
+      </div>
+    </div>
+  </div>
+</div>

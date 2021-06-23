@@ -1,0 +1,123 @@
+<!-- SelectTicket Modal -->
+<div class="modal fade" id="rewindClient" tabindex="-1" role="dialog" aria-labelledby="chooseQueueLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="chooseQueueLabel">Перерегистрация билета</h4>
+            </div>
+            <div class="modal-body">
+                <div class="wizard">
+                    <div class="wizard-inner">
+                        <!-- <div class="connecting-line"></div> -->
+                        <ul class="nav nav-tabs" role="tablist">
+
+                            <li role="presentation" class="active">
+                                <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Выбор услуги">
+                                    <span class="round-tab">
+                                        <i class="glyphicon glyphicon-folder-open"></i>
+                                    </span>
+                                </a>
+                            </li>
+
+                            <li role="presentation" class="disabled">
+                                <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Перерегистрировать">
+                                    <span class="round-tab">
+                                        <i class="glyphicon glyphicon-ok"></i>
+                                    </span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" role="tabpanel" id="step1">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <!-- ko if: rewindTicketQueue-->
+                                    <div class="wizard-buttons">
+                                        <button type="button" class="btn btn-default next-step" data-bind="click: nextWizardTab">
+                                            <span>Далее</span>
+                                            <span class="glyphicon glyphicon-arrow-right"></span>
+                                        </button>
+                                    </div>
+                                    <!-- /ko -->
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-10 col-sm-10">
+                                    <span> Выбранная очередь: </span>
+                                    <!-- ko if: rewindTicketQueue-->
+                                    <span data-bind="text: rewindTicketQueue().chosenQueueName "></span>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+
+                            <div id="queueSelect" class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <ul id="tree2" data-bind="template: { if: $data.queueList, name: 'treeElement', foreach: $data.queueList }"></ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" role="tabpanel" id="complete">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="wizard-buttons">
+                                        <button type="button" class="btn btn-default next-step" data-bind="click: prevWizardTab">
+                                            <span class="glyphicon glyphicon-arrow-left"></span>
+                                            <span>Назад</span>
+                                        </button>
+
+                                        <button type="button" class="btn btn-default next-step" data-bind="click: rewindClient">
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                            <span>Перерегистрировать</span>
+                                        </button>
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12">
+                                    <h4>Данные перерегистрации</h4>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12">
+                                            <!-- ko if: rewindTicketQueue-->
+                                            <label>Выбранная очередь:</label>&nbsp;<span data-bind="text: rewindTicketQueue().chosenQueueName "></span>
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12">
+                                            <!-- ko if: rewindTicketComment !== '' -->
+                                            <label>Комментарий:</label>&nbsp;<span data-bind="text: rewindTicketComment "></span>
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="treeElement" type="text/html">
+    <li>
+        <!-- ko ifnot: hasChildren -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <input type="radio" name="QueueId" data-bind="attr: {id: queueid}, value: queueid"/>
+                <a href="#" data-bind="text: workname, attr: {id:'a-' + queueid()}"></a>
+            </div>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: hasChildren -->
+        <a href="#" data-bind="text: workname"></a>
+        <ul data-bind="template: { name: 'treeElement', foreach: children }"></ul>
+        <!-- /ko -->
+    </li>
+</script>

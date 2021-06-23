@@ -1,0 +1,32 @@
+<!-- SignIn Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="logoutModalLabel">Пожалуйста, выберите причину</h4>
+      </div>
+      <div class="modal-body">
+        <form id="operator-logout" class="form-signin" autocomplete="off">
+          <label class="container-radio">Обеденный перерыв
+            <input value="Obedennyj pereryv" name="cause" type="radio" checked="checked">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-radio">Завершение рабочего дня
+            <input value="Zavershenie rabochego dnya" name="cause" type="radio">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-radio">Отпросился
+            <input value="Otprosilsya" name="cause" type="radio">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container-radio">Другие причины
+            <input value="Drugie prichiny" name="cause" type="radio">
+            <span class="checkmark"></span>
+          </label>
+          <button class="btn btn-lg btn-success btn-block" id="login-windows" data-bind="click: onCompleteSession">Закончить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

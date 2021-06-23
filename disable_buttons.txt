@@ -1,0 +1,4 @@
+ticket_selection:false;
+redirect:false;
+set_aside:false;
+auto_call:true;

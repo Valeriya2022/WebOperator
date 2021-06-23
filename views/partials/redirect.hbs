@@ -1,0 +1,267 @@
+<!-- SelectTicket Modal -->
+<div class="modal fade" id="redirectClient" tabindex="-1" role="dialog" aria-labelledby="chooseClientLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="chooseClientLabel">Перенаправление билета</h4>
+            </div>
+            <div class="modal-body">
+                <div class="wizard">
+                    <div class="wizard-inner">
+                        <div class="connecting-line"></div>
+                        <ul class="nav nav-tabs" role="tablist">
+
+                            <li role="presentation" class="active">
+                                <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Выбор очереди">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-folder-open"></i>
+                            </span>
+                                </a>
+                            </li>
+
+                            <li role="presentation" class="disabled">
+                                <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Выбор оператора">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-user"></i>
+                            </span>
+                                </a>
+                            </li>
+                            <li role="presentation" class="disabled">
+                                <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Прочее">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-pencil"></i>
+                            </span>
+                                </a>
+                            </li>
+
+                            <li role="presentation" class="disabled">
+                                <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Перенаправить">
+                            <span class="round-tab">
+                                <i class="glyphicon glyphicon-ok"></i>
+                            </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-content">
+                        <div class="tab-pane active" role="tabpanel" id="step1">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <!-- ko if: redirectTicketQueue-->
+                                    <div class="wizard-buttons">
+                                        <button type="button" class="btn btn-default next-step" data-bind="click: chooseRedirectOperator">
+                                            <span>Далее</span>
+                                            <span class="glyphicon glyphicon-arrow-right"></span>
+                                        </button>
+                                    </div>
+                                    <!-- /ko -->
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-10 col-sm-10">
+                                    <span> Выбранная очередь: </span>
+                                    <!-- ko if: redirectTicketQueue-->
+                                    <span data-bind="text: redirectTicketQueue().chosenQueueName "></span>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+
+                            <div id="queueSelect" class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                    <ul id="tree1" data-bind="template: { if: $data.queueList, name: 'treeElement', foreach: $data.queueList }"></ul>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="tab-pane" role="tabpanel" id="step2">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="wizard-buttons">
+                                        <button type="button" class="btn btn-default next-step" data-bind="click: prevWizardTab">
+                                            <span class="glyphicon glyphicon-arrow-left"></span>
+                                            <span>Назад</span>
+                                        </button>
+                                        <!-- ko if: redirectTicketOperator-->
+                                        <button type="button" class="btn btn-default next-step" data-bind="click: nextWizardTab">
+                                            <span>Далее</span>
+                                            <span class="glyphicon glyphicon-arrow-right"></span>
+                                        </button>
+                                        <!-- /ko -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <span> Выбранный оператор: </span>
+                                    <!-- ko if: redirectTicketOperator-->
+                                    <span data-bind="text: redirectTicketOperator().workName "></span>
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <select id="queueOperator" class="form-control" data-bind="options: operatorList, optionsText: 'workName', value: redirectTicketOperator">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" role="tabpanel" id="step3">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="wizard-buttons">
+                                        <button type="button" class="btn btn-default next-step" data-bind="click: prevWizardTab">
+                                            <span class="glyphicon glyphicon-arrow-left"></span>
+                                            <span>Назад</span>
+                                        </button>
+
+                                        <button type="button" class="btn btn-default next-step" data-bind="click: nextWizardTab">
+                                            <span>Далее</span>
+                                            <span class="glyphicon glyphicon-arrow-right"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                    <label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"   data-bind="checked: redirectTicketNext;" />&nbsp;&nbsp;На другой день</label>
+
+                                <div class="form-group" data-bind="if: redirectTicketNext">
+                                    <label for="date">&nbsp;&nbsp;&nbsp;&nbsp;Дата</label>
+                                    <input id="date" type="date" data-bind="value: redirectTicketDate"  >
+                                    <br>  <br>
+                                    <label for="time">&nbsp;&nbsp;&nbsp;&nbsp;Время</label>
+                                    <input id="time" type="time" data-bind="value: redirectTicketTime">
+                                </div>
+                                <!--<div class="form-group">-->
+                                <!--<label for="RedirectPriority">Причина</label>-->
+                                <!--<select id="RedirectPriority" class="form-control" data-bind="value: redirectTicketReason">-->
+                                <!--<option value="0">Не достаточно денег</option>-->
+                                <!--<option value="1">Не хватает документов</option>-->
+                                <!--</select>-->
+                                <!--</div>-->
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="RedirectPriority">Приоритет</label>
+                                        <select id="RedirectPriority" class="form-control" data-bind="value: redirectTicketPriority">
+                                            <option value="0">Стандартный</option>
+                                            <option value="1">Высокий</option>
+                                            <option value="2">Максимальный</option>
+                                            <option value="3">VIP</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="RedirectReturnBack">Возврат билета</label>
+                                        <input id="RedirectReturnBack" type="checkbox" data-bind="checked: redirectTicketReturnBack">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputName2">Комментарий</label>
+                                        <textarea class="form-control" rows="2" data-bind="value: redirectTicketComment"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="tab-pane" role="tabpanel" id="complete">
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12">
+                                    <div class="wizard-buttons">
+                                        <button type="button" class="btn btn-default next-step" data-bind="click: prevWizardTab">
+                                            <span class="glyphicon glyphicon-arrow-left"></span>
+                                            <span>Назад</span>
+                                        </button>
+
+                                        <button type="button" class="btn btn-default next-step" data-bind="click: redirectClient">
+                                            <span class="glyphicon glyphicon-ok"></span>
+                                            <span>Перенаправить</span>
+                                        </button>
+
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-12">
+                                    <h4>Данные перенаправления</h4>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12">
+                                            <!-- ko if: redirectTicketQueue-->
+                                            <label>Выбранная очередь:</label>&nbsp;<span data-bind="text: redirectTicketQueue().chosenQueueName "></span>
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12">
+                                            <!-- ko if: redirectTicketOperator-->
+                                            <label>Выбранный оператор:</label>&nbsp;<span data-bind="text: redirectTicketOperator().workName "></span>
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12">
+                                            <!-- ko if: redirectTicketOperator-->
+                                            <label>Дата:</label>&nbsp;<span data-bind="text: redirectTicketDate "></span>
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12">
+                                            <!-- ko if: redirectTicketOperator-->
+                                            <label>Время:</label>&nbsp;<span data-bind="text: redirectTicketTime "></span>
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                    <!--div class="row">
+                                      <div class="col-xs-12 col-sm-12">
+                                        <!-- ko if: redirectTicketPriority->
+                                          <span data-bind="text: redirectTicketPriority "></span>
+                                        <!-- /ko ->
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col-xs-12 col-sm-12">
+                                        <!-- ko if: redirectTicketReturnBack->
+                                          <span data-bind="text: redirectTicketReturnBack "></span>
+                                        <!-- /ko ->
+                                      </div>
+                                    </div-->
+                                    <div class="row">
+                                        <div class="col-xs-12 col-sm-12">
+                                            <!-- ko if: redirectTicketComment !== '' -->
+                                            <label>Комментарий:</label>&nbsp;<span data-bind="text: redirectTicketComment "></span>
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script id="treeElement" type="text/html">
+    <li>
+        <!-- ko ifnot: hasChildren -->
+        <div class="row">
+            <div class="col-xs-12 col-sm-12">
+                <input type="radio" name="QueueId" data-bind="attr: {id: queueid}, value: queueid"/>
+                <a href="#" data-bind="text: workname, attr: {id:'a-' + queueid()}"></a>
+            </div>
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: hasChildren -->
+        <a href="#" data-bind="text: workname"></a>
+        <ul data-bind="template: { name: 'treeElement', foreach: children }"></ul>
+        <!-- /ko -->
+    </li>
+</script>

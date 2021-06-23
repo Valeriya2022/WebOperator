@@ -1,0 +1,435 @@
+body {
+  padding-top: 15px;
+  background-color: #eee;
+}
+#notifications {
+  cursor: pointer;
+  position: fixed;
+  right: 0px;
+  z-index: 9999;
+  bottom: 0px;
+  margin-bottom: 22px;
+  margin-right: 15px;
+  max-width: 300px;
+}
+.btn:focus, .btn:active:focus, .btn.active:focus {
+  outline: 0 none;
+}
+.hidden{
+  visibility: hidden;
+}
+#ticket-info {
+  margin-top: 0.2em;
+}
+.btn{
+  padding-left:3% !important;
+}
+
+#ticket-number {
+  font-size: 3em;
+  text-align: center;
+  font-weight: bold;
+}
+
+#event-id {
+  display: none;
+}
+
+.panel {
+  margin-bottom: 0.2em;
+}
+
+.label {
+  display: block;
+  height: 1.7em;
+  font-size: 1em;
+  text-align: left;
+  padding: 0.5rem 0 0 1.5rem;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* Customize the label (the container-radio) */
+.container-radio {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container-radio input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container-radio:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container-radio input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container-radio input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container-radio .checkmark:after {
+  top: 9px;
+  left: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+}
+
+
+.label-right {
+  text-align: right;
+  width: 49%;
+  float: left;
+}
+
+.label-left {
+  text-align: left;
+  width: 49%;
+  float: left;
+}
+
+.label-bottom {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.btn-lg-text {
+  font-size: 0.87em;
+}
+
+#signIn, #signOut {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.panel-heading {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: -1px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin select {
+  /*margin-bottom: 40px;*/
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.form-signin button {
+  margin-top: 40px;
+}
+
+.form-send-btn {
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+/* treeview */
+/*#queueSelect {
+  height: 200px;
+  overflow-y: scroll;
+}*/
+
+.tree, .tree ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tree ul {
+  margin-left: .5em;
+  position: relative;
+}
+
+.tree ul ul {
+  margin-left: .5em;
+}
+
+.tree ul:before {
+  content: "";
+  display: block;
+  width: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  border-left: 1px solid;
+}
+
+.tree li {
+  margin: 0;
+  padding: 0 1em;
+  line-height: 2em;
+  color: #666;
+  font-weight: 700;
+  position: relative
+}
+
+.tree ul li:before {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 0;
+  border-top: 1px solid;
+  margin-top: -1px;
+  position: absolute;
+  top: 1em;
+  left: 0;
+}
+.tree ul li:last-child:before {
+  background: #fff;
+  height: auto;
+  top: 1em;
+  bottom: 0;
+}
+.indicator {
+  margin-right:5px;
+  color: #666;
+}
+.tree li a {
+  text-decoration: none;
+  color: #444;
+  outline: 0;
+}
+
+.tree li a:hover {
+  color: #777;
+}
+
+.tree li a:active {
+  color: black;
+}
+
+.tree li a:focus {
+  color: #54a845;
+}
+
+.tree li button, .tree li button:active, .tree li button:focus {
+  text-decoration: none;
+  color: #666;
+  border: none;
+  background: transparent;
+  margin: 0px 0px 0px 0px;
+  padding: 0px 0px 0px 0px;
+  outline: 0;
+}
+
+
+/* wizard */
+
+.wizard {
+  margin: 0 auto;
+  background: #fff;
+}
+
+  .wizard .nav-tabs {
+    position: relative;
+    margin: 0 auto;
+    border-bottom-color: #e0e0e0;
+  }
+
+  .wizard > div.wizard-inner {
+    position: relative;
+  }
+
+.connecting-line {
+  height: 2px;
+  background: #e0e0e0;
+  position: absolute;
+  width: 80%;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 50%;
+  z-index: 1;
+}
+
+.wizard .nav-tabs > li.active > a, .wizard .nav-tabs > li.active > a:hover, .wizard .nav-tabs > li.active > a:focus {
+  color: #555555;
+  cursor: default;
+  border: 0;
+  border-bottom-color: transparent;
+}
+
+span.round-tab {
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  display: inline-block;
+  border-radius: 100px;
+  background: #fff;
+  border: 2px solid #e0e0e0;
+  z-index: 2;
+  position: absolute;
+  left: 0;
+  text-align: center;
+  font-size: 20px;
+}
+span.round-tab i{
+  color:#555555;
+}
+.wizard li.active span.round-tab {
+  background: #fff;
+  border: 2px solid #5cb85c;
+}
+.wizard li.active span.round-tab i{
+  color: #5cb85c;
+}
+
+span.round-tab:hover {
+  color: #333;
+  border: 2px solid #333;
+}
+
+.wizard .nav-tabs > li {
+  width: 25%;
+}
+
+.wizard li:after {
+  content: " ";
+  position: absolute;
+  left: 43%;
+  opacity: 0;
+  margin: 0 auto;
+  bottom: 0px;
+  border: 5px solid transparent;
+  border-bottom-color: #5cb85c;
+  transition: 0.1s ease-in-out;
+}
+
+.wizard li.active:after {
+  content: " ";
+  position: absolute;
+  left: 43%;
+  opacity: 1;
+  margin: 0 auto;
+  bottom: 0px;
+  border: 10px solid transparent;
+  border-bottom-color: #5cb85c;
+}
+
+.wizard .nav-tabs > li a {
+  width: 50px;
+  height: 50px;
+  margin: 20px auto;
+  border-radius: 100%;
+  padding: 0;
+  outline: 0;
+}
+
+  .wizard .nav-tabs > li a:hover {
+    background: transparent;
+  }
+
+.wizard .tab-pane {
+  position: relative;
+  padding-top: 20px;
+}
+
+.wizard .wizard-buttons {
+  margin: 10px 10px 10px 0;
+  float: right;
+}
+
+@media( max-width : 585px ) {
+
+  .wizard {
+    width: 90%;
+    height: auto !important;
+  }
+
+  span.round-tab {
+    font-size: 16px;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+  }
+
+  .wizard .nav-tabs > li a {
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+  }
+
+  .wizard li.active:after {
+    content: " ";
+    position: absolute;
+    left: 35%;
+  }
+}
+
+.xs-text {
+  font-size: 12px;
+}
