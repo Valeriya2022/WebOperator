@@ -16,7 +16,9 @@
           <input id="inputLogin" class="form-control" data-bind="textInput: operatorLogin, enable: !windowList().length" placeholder="Логин" required="" autofocus="" type="text" autocomplete="off">
           <label for="inputPassword" class="sr-only">Пароль</label>
           <input id="inputPassword" class="form-control" data-bind="textInput: operatorPassword, enable: !windowList().length" placeholder="Пароль" required="" type="password" autocomplete="off">
-
+          <!-- ko ifnot: windowList().length -->
+          <h1>Неверный логин или пароль</h1>
+          <!-- /ko -->
 		<!-- ko if: windowList().length -->
           <select id="inputWindow" class="form-control" required>
             <option id="default-option" selected="selected">Номер окна</option>
@@ -28,9 +30,9 @@
           </select>
 		<!-- /ko -->
 
-    
+    <!-- ko if: windowList().length -->
           <button class="btn btn-lg btn-success btn-block" type="submit" >Войти</button>
-		
+		<!-- /ko -->
 
     <!-- ko if: windowList().length -->
           <button class="btn btn-lg btn-success btn-block" data-bind="click: resetLoginWindow">Отмена</button>

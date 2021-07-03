@@ -50,7 +50,7 @@ $(function () {
         metadata = {
           pageTitle: 'Nomad SOAP Operator',
           personal: {
-            author: 'Kanat Kunikeyev',
+            author: 'Valeriya Nikiforova',
             vendorlibs: [
               'Knockout JS',
               'JQuery',

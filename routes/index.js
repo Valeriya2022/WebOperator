@@ -9,22 +9,24 @@ var soap = new NomadSoap(config.soap.host, config.soap.port, config.soap.url);
 
 /* GET home page. */
 fs.readFile('disable_buttons.txt','utf8', function(err, data){
+  var hid1, hid2, hid3, hid4;
   if (err){
     console.log(err)
   }else{
+    console.log(data)
    var ticket_selection = 'ticket_selection:true' ;
     var redirect = 'redirect:true' ;
     var set_aside = 'set_aside:true' ;
     var auto_call = 'auto_call:true' ;
-    if((data.indexOf(ticket_selection) > -1) == true){
-      var hid1 = 'hidden';
-    }    if((data.indexOf(redirect) > -1) == true){
-      var hid2 = 'hidden';
-    }    if((data.indexOf(set_aside) > -1) == true){
-      var hid3 = 'hidden';
-    }  if((data.indexOf(auto_call) > -1) == true){
-      var hid4 = 'hidden';
-    }
+    // if((data.indexOf(ticket_selection) > -1) == true){
+    //   var hid1 = 'hidden';
+    // }    if((data.indexOf(redirect) > -1) == true){
+    //   var hid2 = 'hidden';
+    // }    if((data.indexOf(set_aside) > -1) == true){
+    //   var hid3 = 'hidden';
+    // }  if((data.indexOf(auto_call) > -1) == true){
+    //   var hid4 = 'hidden';
+    // }
     router.get('/', function(req, res, next) {
      if(hid4 == 'hidden'){
        res.render('index', {
@@ -114,7 +116,6 @@ router.post('/login1', function(req, res, next) {
   if (req.body){
     logger.debug('loading windows list for operator: ' + req.body.login);//console.log('loading windows list for operator: ' + req.body.login);
     soap.operatorAuth1(req.body.login, req.body.password, function(data) {
-      //console.log(data);
       res.send(data);
     });
   }

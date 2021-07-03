@@ -80,9 +80,13 @@ var NomadSoap = function(host, port, url) {
         },
 
         function (error, response, body) {
+          console.log(response.statusCode)
         if (error) logger.error(error);//console.log('Error: ' + error);
+          else if(response.statusCode == 200 && response.body == "Wrong login"){
+            return callback(response.body)
+          }
           else if(response.statusCode == 200) {
-            console.log(body);//test
+            console.log(body);
 			parser.parseString(body, function (err, result) {
               if(err) logger.error(err);//console.log('Error: ' + err);
               else {
